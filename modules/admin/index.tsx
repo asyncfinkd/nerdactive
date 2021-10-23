@@ -17,7 +17,7 @@ const Admin: NextPage = () => {
     watch,
   } = useForm<AdminInputs>({ resolver: yupResolver(AdminSchema) });
   const ErrorMessageToastify = (errors: any) => {
-    toast.error(errors);
+    toast.error(errors, { autoClose: 3000 });
   };
 
   useEffect(() => {
