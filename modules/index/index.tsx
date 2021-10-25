@@ -1,12 +1,15 @@
+import { readCookie } from "lib/read-cookie";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "ui/footer";
 import Header from "ui/header";
 import SubHeader from "ui/subHeader";
 import IndexCard from "./components/index-card";
 
 const Home: NextPage = () => {
+  const [showToggle, setShowToggle] = useState<any>(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.classList.add("light");
@@ -33,7 +36,7 @@ const Home: NextPage = () => {
             padding: "2.625rem 1.3125rem",
           }}
         >
-          <Header />
+          <Header showToggle={showToggle} setShowToggle={setShowToggle} />
           <SubHeader />
           <IndexCard />
           <Footer />

@@ -1,3 +1,11 @@
 import Home from "modules/index";
 
-export default Home;
+function HomePage() {
+  return (
+    <>
+      <Home />
+    </>
+  );
+}
+
+export default HomePage;
