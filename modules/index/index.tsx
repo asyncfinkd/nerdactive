@@ -1,25 +1,19 @@
-import { readCookie } from "lib/read-cookie";
+import Actions from "actions/modules/index";
 import type { NextPage } from "next";
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import Footer from "ui/footer";
-import Header from "ui/header";
-import SubHeader from "ui/subHeader";
-import IndexCard from "./components/index-card";
 
 const Home: NextPage = () => {
-  const [showToggle, setShowToggle] = useState<any>(false);
+  const [showToggle, setShowToggle] = Actions.useState<any>(false);
 
-  useEffect(() => {
+  Actions.useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.classList.add("light");
     }
   });
   return (
     <>
-      <Head>
+      <Actions.Head>
         <title>Nerdactive — A blog by Nika Shamiladze</title>
-      </Head>
+      </Actions.Head>
       <div
         style={{
           color: "var(--textNormal)",
@@ -36,10 +30,13 @@ const Home: NextPage = () => {
             padding: "2.625rem 1.3125rem",
           }}
         >
-          <Header showToggle={showToggle} setShowToggle={setShowToggle} />
-          <SubHeader />
-          <IndexCard />
-          <Footer />
+          <Actions.Header
+            showToggle={showToggle}
+            setShowToggle={setShowToggle}
+          />
+          <Actions.SubHeader />
+          <Actions.IndexCard />
+          <Actions.Footer />
         </div>
       </div>
     </>
