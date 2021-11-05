@@ -1,13 +1,6 @@
+import Actions from "actions/modules/admin";
 import { NextPage } from "next";
-import Head from "next/head";
-import React, { useEffect } from "react";
-import { Button, FormControl, TextField } from "@mui/material";
-import Box from "@mui/material/Box";
 import { AdminInputs } from "types/admin";
-import { useForm } from "react-hook-form";
-import { AdminSchema } from "schema/admin";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { ToastContainer, toast } from "react-toastify";
 
 const Admin: NextPage = () => {
   const {
@@ -15,12 +8,14 @@ const Admin: NextPage = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<AdminInputs>({ resolver: yupResolver(AdminSchema) });
+  } = Actions.useForm<AdminInputs>({
+    resolver: Actions.yupResolver(Actions.AdminSchema),
+  });
   const ErrorMessageToastify = (errors: any) => {
-    toast.error(errors, { autoClose: 3000 });
+    Actions.toast.error(errors, { autoClose: 3000 });
   };
 
-  useEffect(() => {
+  Actions.useEffect(() => {
     if (errors.email) {
       ErrorMessageToastify(errors.email.message);
     } else if (errors.password) {
@@ -29,10 +24,10 @@ const Admin: NextPage = () => {
   }, [errors]);
   return (
     <>
-      <Head>
+      <Actions.Head>
         <title>Login | Nerdactive</title>
-      </Head>
-      <Box
+      </Actions.Head>
+      <Actions.Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -45,19 +40,19 @@ const Admin: NextPage = () => {
             console.log(data);
           })}
         >
-          <FormControl
+          <Actions.FormControl
             sx={{
               width: 300,
             }}
           >
-            <TextField
+            <Actions.TextField
               id="filled-basic"
               label="Email address"
               variant="filled"
               type="text"
               {...register("email")}
             />
-            <TextField
+            <Actions.TextField
               sx={{ marginTop: 2 }}
               id="filled-basic"
               label="Password"
@@ -65,17 +60,17 @@ const Admin: NextPage = () => {
               variant="filled"
               {...register("password")}
             />
-            <Button
+            <Actions.Button
               variant="contained"
               type="submit"
               sx={{ marginTop: 2, height: "44px" }}
             >
               Login
-            </Button>
-          </FormControl>
+            </Actions.Button>
+          </Actions.FormControl>
         </form>
-      </Box>
-      <ToastContainer />
+      </Actions.Box>
+      <Actions.ToastContainer />
     </>
   );
 };
